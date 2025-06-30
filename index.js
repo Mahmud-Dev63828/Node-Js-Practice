@@ -4,21 +4,47 @@ const fs = require('fs')
 const {log} = require('console')
 const [, , command, folderName, fileName, fileValue] = terminalInput
 
-console.log(command,folderName,fileName,fileValue);
 
 switch (command) {
     case 'addFolder':{
-      const   isExistFolder = fs.existsSync('node')
+      const   isExistFolder = fs.existsSync(folderName)
       if (isExistFolder){
         log('this folder is already exist . try another')
       } else {
 
-          fs.mkdir('node', (err)=>{
+          fs.mkdir(folderName, (err)=>{
            if(err){
                log('error to make directory',err)
            }
           })
       }
+      break
+    }
+    case 'addFile':{
+
+      const outTargetedPath = path.join(__dirname, `${fileName}.txt`, fileName)
+       const   isExistFile = fs.existsSync(outTargetedPath)
+
+       if(isExistFile){
+     return   log('the file is already have , try another')
+       }else{
+
+      
+
+      fs.writeFile(outTargetedPath, fileValue, (err)=>{
+        if(err){
+          log('error to make file')
+        }else{
+          log(`${fileName}.txt created`)
+        }
+      })
+
+       }
+
+    
+
+
+        break
     }
         
 
