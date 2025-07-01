@@ -22,7 +22,7 @@ switch (command) {
     }
     case 'addFile':{
 
-      const outTargetedPath = path.join(__dirname, `${fileName}.txt`, fileName)
+   const outTargetedPath = path.join(__dirname, folderName, `${fileName}.txt`)
        const   isExistFile = fs.existsSync(outTargetedPath)
 
        if(isExistFile){
@@ -45,6 +45,22 @@ switch (command) {
 
 
         break
+    }
+    case 'readFile':{
+          const targetPath = path.join(__dirname, folderName, `${fileName}.txt`)
+          const   isExistFile = fs.existsSync(targetPath)
+          if(isExistFile){
+              fs.readFile(targetPath, 'utf-8', (err, data)=>{
+                if(err){
+                return  log('error to read file', err)
+                }else{
+                  log(data)
+                }
+              })
+          } else {
+            log('this file fill is not exist in this directory ')
+          }
+      break;
     }
         
 
