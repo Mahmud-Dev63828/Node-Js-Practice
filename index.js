@@ -83,6 +83,28 @@ switch (command) {
 
       break;
     }
+    case 'deleteFile': {
+         const outTargetedPath = path.join(__dirname, folderName, `${fileName}.txt`)
+       const   isExistFile = fs.existsSync(outTargetedPath)
+       if (isExistFile  ){
+      fs.unlink(outTargetedPath , (err)=>{
+        if(err){
+
+          log('failed to delete folder',)
+        }else {
+
+
+            log(`${fileName} deleted`)
+
+        }
+      })
+   
+    
+       }
+    
+
+      break;
+    }
         
 
 }
