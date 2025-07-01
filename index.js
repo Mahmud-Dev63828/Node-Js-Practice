@@ -62,6 +62,27 @@ switch (command) {
           }
       break;
     }
+    case 'deleteFolder':{
+       const outTargetedPath = path.join(__dirname, folderName)
+       const   isExistFile = fs.existsSync(outTargetedPath)
+       if (isExistFile  ){
+      fs.rm(outTargetedPath , {recursive : true, force : true} , (err)=>{
+        if(err){
+
+          log('failed to delete folder',)
+        }else {
+
+
+            log(`${folderName} deleted`)
+
+        }
+      })
+   
+    
+       }
+
+      break;
+    }
         
 
 }
