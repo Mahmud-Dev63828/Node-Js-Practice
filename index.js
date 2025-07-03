@@ -6,6 +6,8 @@
 // const [, , command, folderName, fileName, fileValue] = terminalInput
 
 
+
+
 // switch (command) {
 //     case 'addFolder':{
 //      makeAddFolder(folderName)
@@ -112,42 +114,63 @@
 // getall method ta dekhte hobe
 
 // ! HTTP
-const { log } = require('console')
-const url = require('url')
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const event = require('events');
-const { fetchPost } = require('./event');
-const eventEmiter = new event()
+// const { log } = require('console')
+// const url = require('url')
+// const http = require('http');
+// const fs = require('fs');
+// const path = require('path');
+// const event = require('events');
+// const { fetchPost } = require('./event');
+// const eventEmiter = new event()
 
-
-
-
-const server = http.createServer((req, res) => {
-  if(req.url == '/post'){
-   const path = fetchPost('post')
-   fs.readFile(path, 'utf-8', (err,data)=>{
-    if(err){
-        return log(err)
-    }
-   res.end(data)
-   })
+// const server = http.createServer((req, res) => {
+//   if(req.url == '/post'){
+//    const path = fetchPost('post')
+//    fs.readFile(path, 'utf-8', (err,data)=>{
+//     if(err){
+//         return log(err)
+//     }
+//    res.end(data)
+//    })
  
-    //   eventEmiter.emit('fetchPost', (data)=>{
-    //      const targetPath = path.join(__dirname, 'post.json')
-    //      fs.writeFile(targetPath, JSON.stringify(data), (err)=>{
-    //         if(err){
-    //             return log('error from write post data')
-    //         }
-    //      })
-    //      fs.readFile(targetPath, 'utf-8', (err, data)=>{
-    //         res.end(data)
-    //      })
-    //   })
-  }
+//     //   eventEmiter.emit('fetchPost', (data)=>{
+//     //      const targetPath = path.join(__dirname, 'post.json')
+//     //      fs.writeFile(targetPath, JSON.stringify(data), (err)=>{
+//     //         if(err){
+//     //             return log('error from write post data')
+//     //         }
+//     //      })
+//     //      fs.readFile(targetPath, 'utf-8', (err, data)=>{
+//     //         res.end(data)
+//     //      })
+//     //   })
+//   }
+// });
+
+// server.listen(4000, () => {
+//     console.log(`Server is running at: http://localhost:4000`);
+// });
+
+// ! Mini Express Js Project
+const ourFramework = require('./frameWork/app')
+const { log } = require("console");
+const  app =    new ourFramework()
+app.use((req, res, next)=>{
+    log('this is middleware function 1 ', req.url)
+    next()
+})
+app.use((req, res, next)=>{
+    log('this is middleware function 2 ', req.url)
+     next()
+})
+app.use((req, res, next)=>{
+    log('this is middleware function 3 ', req.url)
+     
+})
+
+app.ourListen(3000, () => {
+  console.log("Server Running on port http://localhost:3000");
 });
 
-server.listen(4000, () => {
-    console.log(`Server is running at: http://localhost:4000`);
-});
+// log(app)
+
